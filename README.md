@@ -1,5 +1,11 @@
 # S I X V O I X
-<<<<<<< HEAD
+
+*Projet réalisé dans le cadre du module Node.js de mon DUT Informatique, il consiste en la réalisation d'un site répertoriant des personnalités et leurs informations.*
+
+###WORK IN PROGRESS - 02/02/2021 - ...
+
+Struture de base fournie par le professeur encadrant : https://gitlab.com/MiCha/vip.git
+
 =======
 Structure de base pour l'application SixVoix de l'IUT en Node.js.<br />
 Le fichier vip.sql vous permettra de créer votre base vip.<br />
@@ -12,7 +18,7 @@ Le fichier config.db contient les paramètres pour la base MySQL<br />
 Si vous le modifiez merci de le remettre aux valeurs initiales avant de rendre votre travail <br /><br /><br />
 
 Pour cloner le dépôt, vous pouvez taper :<br />
-git clone https://gitlab.com/MiCha/vip.git votreRep<br /><br />
+git clone  votreRep<br /><br />
 
 Le dépôt ne contient pas les modules nécessaires au fonctionnement de l'application <br />
 test
