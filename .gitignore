@@ -1,6 +1,7 @@
 # Les lignes commençant par '#' sont des commentaires.
 # Ignorer tous les fichiers nommés *.*~
 *.*~
+README.md
 package-lock.json
 # Ignorer tous le repertoire node_modules
 node_modules/*
