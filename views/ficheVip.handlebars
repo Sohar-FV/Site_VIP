@@ -1,0 +1,32 @@
+
+<div style="border:1px solid black; text-align:left; padding-left: 1%;">
+  <h2>Cliquez sur une lettre :
+    {{#each firstLetters}}
+
+      <a href="/repertoire/{{this.FL}}"> {{this.FL}} </a>
+    {{/each}}
+  </h2>
+  <br>
+  <div style="display:flex; flex direction:row;">
+  <img src="http://placehold.it/100x150" style="height : 150px; width: auto;" > <br>
+  Nom : {{ prenom }} {{ nom }} <br><br>
+  Date de naissance : {{ dateNai }} <br>
+  Nationalité : {{ nationalite }} <br>
+  </div>
+
+  {{#each  metier}}
+
+    Profession : {{ metier }}
+    Principal(aux) {{ typeProd }} :
+    {{#each  production}}
+
+      {{ nomProd }} <a href="/repertoire/vip/{{ nom2 }}"> {{ nom2 }} </a>
+
+    {{/each}} <br>
+
+  {{/each}} <br>
+
+  Mariage(s) : <br><br>
+
+  Liaisons : <br><br>
+</div>

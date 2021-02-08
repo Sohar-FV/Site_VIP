@@ -14,12 +14,12 @@ module.exports.Repertoire = 	function(request, response){
 
      function (callback){
          model.firstLetterVip(function(err, result)  {callback(null,result) } )
-         },
+     },
      function (callback){
-       model.vipByLetter(request.params.letter, (function(errE, resE)  {callback(null,resE) } ));
+        model.vipByLetter(request.params.letter, (function(errE, resE)  {callback(null,resE) } ));
      },
    ],
-    function (err, result){
+   function (err, result){
       if (err) {
           console.log(err);
           return;
@@ -32,21 +32,8 @@ module.exports.Repertoire = 	function(request, response){
   );
 }
 
+module.exports.ficheVip = 	function(request, response){
 
-
-
-module.exports.RepertoireLetter = 	function(request, response){
-   response.title = 'Répertoire des stars';
-
-   model.firstLetterVip(function(err, result){  // appel le module test qui exécute la requete SQL
-       if (err) {
-           console.log(err);
-           return;
-       }
-       response.firstLetters = result;
-
-
-      response.render('repertoireVips', response);
-  } );
+      response.render('ficheVip', response);
 
 }
