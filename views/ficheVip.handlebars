@@ -3,26 +3,32 @@
   <h2>Cliquez sur une lettre :
     {{#each firstLetters}}
 
-      <a href="/repertoire/{{this.FL}}"> {{this.FL}} </a>
+    <a href="/repertoire/{{this.FL}}"> {{this.FL}} </a>
     {{/each}}
   </h2>
   <br>
   <div style="display:flex; flex direction:row;">
-  <img src="http://placehold.it/100x150" style="height : 150px; width: auto;" > <br>
-  Nom : {{ prenom }} {{ nom }} <br><br>
-  Date de naissance : {{ dateNai }} <br>
-  Nationalité : {{ nationalite }} <br>
+
+    {{#each vip}}
+    <img src="/images/vip/{{ this.photo }}" style="height : 150px; width: auto;" > <br>
+
+    Nom : {{ this.prenom }} {{ this.nom }} <br><br>
+
+
+    Date de naissance : {{ this.dateNai }} <br>
+    Nationalité : {{ this.natio }} <br>
+    {{/each}}
   </div>
 
   {{#each  metier}}
 
-    Profession : {{ metier }}
-    Principal(aux) {{ typeProd }} :
-    {{#each  production}}
+  Profession : {{ metier }}
+  Principal(aux) {{ typeProd }} :
+  {{#each  production}}
 
-      {{ nomProd }} <a href="/repertoire/vip/{{ nom2 }}"> {{ nom2 }} </a>
+  {{ nomProd }} <a href="/repertoire/vip/{{ nom2 }}"> {{ nom2 }} </a>
 
-    {{/each}} <br>
+  {{/each}} <br>
 
   {{/each}} <br>
 
