@@ -2,11 +2,11 @@
 
 <h2>Cliquez sur une lettre :
 
-{{#each firstLetters}}
+  {{#each firstLetters}}
 
   <a href="/repertoire/{{this.FL}}"> {{this.FL}} </a>
 
-{{/each}}
+  {{/each}}
 </h2>
 
 
@@ -15,7 +15,7 @@
 {{#each noms}}
 <div style="display: inline-block; margin: 10px 25px 20px 25px;" >
   <img src="/images/vip/{{ photo }}" style="height : 150px; width: auto;" > <br>
-  <a href="/repertoire/vip/{{ this.prenom }}_{{ this.nom }}">{{ this.prenom }} {{ this.nom }}</a>
+  <a href="/repertoire/vip/{{ this.numero }}">{{ this.prenom }} {{ this.nom }}</a>
 </div>
 
 {{/each}}
