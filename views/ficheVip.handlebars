@@ -1,24 +1,25 @@
 
 <div style="border:1px solid black; text-align:left; padding-left: 1%;">
-  <h2>Cliquez sur une lettre :
-    {{#each firstLetters}}
 
-    <a href="/repertoire/{{this.FL}}"> {{this.FL}} </a>
-    {{/each}}
-  </h2>
-  <br>
-  <div style="display:flex; flex direction:row;">
+  <div style=" text-align:right; margin-right:1%">
+    Cliquez sur une lettre :
+      {{#each firstLetters}}
+      <a href="/repertoire/{{this.FL}}"> {{this.FL}} </a>
 
-    {{#each vip}}
-    <img src="/images/vip/{{ this.photo }}" style="height : 150px; width: auto;" > <br>
-
-    Nom : {{ this.prenom }} {{ this.nom }} <br><br>
-
-
-    Date de naissance : {{ this.dateNai }} <br>
-    Nationalité : {{ this.natio }} <br>
     {{/each}}
   </div>
+  <br>
+  <div style="">
+
+    <div style="display:inline-block">
+    {{#each photo}}<img src="/images/vip/{{this.photo}}" style="height : 150px; width: auto; float:left; padding: 10px 10px 0 0" > <br>{{/each }}
+    {{#each vip}}
+
+    <b>Nom :</b> {{ this.prenom }} {{ this.nom }} <br><br>
+    <b>Date de naissance :</b> {{formatDate this.dateNai 'DD MMMM YYYY' }} <br><br>
+    <b>Nationalité :</b> {{ this.natio }} <br>
+
+    {{/each }}
 
   {{#each  metier}}
 
@@ -32,7 +33,12 @@
 
   {{/each}} <br>
 
-  Mariage(s) : <br><br>
+  <b>Mariage(s) :</b> <br><br>
 
-  Liaisons : <br><br>
+  {{#each liaison }} <b>Liaison(s) :</b>  {{ this.prenom }} {{ this.nom }} {{formatDate this.date 'MMMM YYYY' }} <b>raison fin liaison :</b> {{ this.motif }} <br><br> {{/each }} 
+
+  {{#each vip}} <b>Qui-suis-je? :</b> {{ this.texte }} {{/each }} <br><br>
+
+  {{#each photoSupp}} <img src="/images/vip/{{this.photo}}" style="height : 150px; width: auto;" > {{/each }}
+  </div>
 </div>

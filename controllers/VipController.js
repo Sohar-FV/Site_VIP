@@ -34,19 +34,38 @@ module.exports.Repertoire = 	function(request, response){
 
 
 
-
-
 module.exports.ficheVip = 	function(request, response){
  response.title = 'Test à supprimer';
 
- model.vipByNum(request.params.numero, (function(err, result){  // appel le module test qui exécute la requete SQL
-     if (err) {
-         console.log(err);
-         return;
-     }
-    response.vip=result;
-    console.log(response.vip);
+ async.parallel ([
 
-    response.render('ficheVip', response); // appel la vue Handlebars qui va afficher le résultat
-} ));
+   function (callback){
+     model.firstLetterVip(function(err, result)  {callback(null,result) } )
+   },
+   function (callback){
+     model.vipByNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.photo1ByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.photoSuppByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.liaisonByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+ ],
+ function (err, result){
+   if (err) {
+     console.log(err);
+     return;
+   }
+   response.firstLetters = result[0]
+   response.vip = result[1];
+   response.photo = result[2];
+   response.photoSupp = result[3];
+   response.liaison = result[4];
+   response.render('ficheVip', response);
+ }
+); // appel la vue Handlebars qui va afficher le résultat
 }
