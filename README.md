@@ -4,7 +4,7 @@
 *Réalisé en [Node.js](https://nodejs.org/fr/)*
 
 -------
-###WORK IN PROGRESS : 02/02/2021 - ...
+WORK IN PROGRESS : 02/02/2021 - ...
 
 Struture de base fournie par le professeur encadrant : https://gitlab.com/MiCha/vip.git
 
