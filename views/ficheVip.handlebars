@@ -21,21 +21,28 @@
 
     {{/each }}
 
-  {{#each  metier}}
+  {{#each  acteur}}
 
-  Profession : {{ metier }}
+  Profession : Acteur(rice)
   Principal(aux) {{ typeProd }} :
-  {{#each  production}}
+    {{#each  film}}
 
-  {{ nomProd }} <a href="/repertoire/vip/{{ nom2 }}"> {{ nom2 }} </a>
+    {{ this.nomFilm }} <a href="/repertoire/vip/{{ this.numReal }}"> {{ this.nomReal }} </a>
+
+    {{/each}} <br>
 
   {{/each}} <br>
 
-  {{/each}} <br>
+   <br>
 
-  <b>Mariage(s) :</b> <br><br>
+  {{#if mariage }} <b>Mariage(s) :</b>{{#each mariage }} <a href="/repertoire/vip/{{ this.num }}">{{ this.prenom }} {{ this.nom }} </a> ({{ formatDate this.date 'MMMM YYYY' }}
+                                        {{#if this.dateFin }}--> {{ formatDate this.dateFin 'MMMM YYYY' }} {{/if}}
+                                        ) <b> Lieu : </b> {{ this.lieu }}
+                                        {{#if this.motif }}  <b> Raison fin mariage :</b> {{ this.motif }} {{/if}} <br><br>{{/each}}
+  {{/if}}
 
-  {{#each liaison }} <b>Liaison(s) :</b>  {{ this.prenom }} {{ this.nom }} {{formatDate this.date 'MMMM YYYY' }} <b>raison fin liaison :</b> {{ this.motif }} <br><br> {{/each }} 
+  {{#if liaison }} <b>Liaison(s) :</b>{{#each liaison }}   <a href="/repertoire/vip/{{ this.num }}">{{ this.prenom }} {{ this.nom }}</a> (){{formatDate this.date 'MMMM YYYY' }}) {{#if this.motif }} <b> Raison fin liaison :</b> {{ this.motif }} {{/if}} <br><br> {{/each }}
+  {{/if}}
 
   {{#each vip}} <b>Qui-suis-je? :</b> {{ this.texte }} {{/each }} <br><br>
 

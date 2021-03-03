@@ -52,7 +52,16 @@ module.exports.ficheVip = 	function(request, response){
      model.photoSuppByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
    },
    function (callback){
+     model.mariageByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
      model.liaisonByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.acteurByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.filmByActorNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
    },
  ],
  function (err, result){
@@ -64,7 +73,10 @@ module.exports.ficheVip = 	function(request, response){
    response.vip = result[1];
    response.photo = result[2];
    response.photoSupp = result[3];
-   response.liaison = result[4];
+   response.mariage = result[4];
+   response.liaison = result[5];
+   response.acteur = result[6];
+   console.log(response.vip);
    response.render('ficheVip', response);
  }
 ); // appel la vue Handlebars qui va afficher le résultat
