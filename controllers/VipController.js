@@ -63,7 +63,33 @@ module.exports.ficheVip = 	function(request, response){
    function (callback){
      model.filmByActorNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
    },
+   function (callback){
+     model.realByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.filmByRealNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.mannequinByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.defileByMannequinNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.couturierByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.defileByCouturierNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.chanteurByVipNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
+   function (callback){
+     model.albumByChanteurNum(request.params.numero, (function(errE, resE)  {callback(null,resE) } ));
+   },
  ],
+
+
  function (err, result){
    if (err) {
      console.log(err);
@@ -76,7 +102,16 @@ module.exports.ficheVip = 	function(request, response){
    response.mariage = result[4];
    response.liaison = result[5];
    response.acteur = result[6];
-   console.log(response.vip);
+   response.filmsA = result[7];
+   response.realisateur = result[8];
+   response.filmsR = result[9];
+   response.mannequin = result[10];
+   response.defilesM = result[11];
+   response.couturier = result[12];
+   response.defilesC = result[13];
+   response.chanteur = result[14];
+   response.albums = result[15];
+   console.log(response.albums);
    response.render('ficheVip', response);
  }
 ); // appel la vue Handlebars qui va afficher le résultat

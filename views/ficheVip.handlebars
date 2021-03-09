@@ -12,33 +12,60 @@
   <div style="">
 
     <div style="display:inline-block">
-    {{#each photo}}<img src="/images/vip/{{this.photo}}" style="height : 150px; width: auto; float:left; padding: 10px 10px 0 0" > <br>{{/each }}
+    {{#each photo}}<img src="/images/vip/{{this.photo}}" style="height : 150px; width: auto; float:left; padding: 10px 10px 0 0" > {{/each }}
     {{#each vip}}
 
     <b>Nom :</b> {{ this.prenom }} {{ this.nom }} <br><br>
     <b>Date de naissance :</b> {{formatDate this.dateNai 'DD MMMM YYYY' }} <br><br>
     <b>Nationalité :</b> {{ this.natio }} <br>
 
-    {{/each }}
+    {{/each }}<br>
 
   {{#each  acteur}}
-
-  Profession : Acteur(rice)
-  Principal(aux) {{ typeProd }} :
-    {{#each  film}}
-
-    {{ this.nomFilm }} <a href="/repertoire/vip/{{ this.numReal }}"> {{ this.nomReal }} </a>
-
+    <b>Profession :</b> {{#each ../vip}} {{#ifCond this.sexe "==" 'M'  }} Acteur {{else}} Actrice {{/ifCond}} {{/each }} <br>
+    {{#if ../filmsA }}<b>Principaux films :</b>{{/if }}
+    {{#each  ../filmsA}}
+      {{ this.nomFilm }} ({{formatDate this.date 'DD MMMM YYYY'}}) de <a href="/repertoire/vip/{{ this.numReal }}"> {{ this.prenomReal }} {{ this.nomReal }} </a><br>
     {{/each}} <br>
+  {{/each}}
 
-  {{/each}} <br>
+  {{#each  realisateur}}
+    <b>Profession :</b> {{#each ../vip}} {{#ifCond this.sexe "==" 'M'  }} Réalisateur {{else}} Réalisatrice {{/ifCond}} {{/each }} <br>
+    {{#if ../filmsR }}<b>Principaux films :</b>{{/if }}
+    {{#each  ../filmsR}}
+      {{ this.titre }} ({{formatDate this.date 'DD MMMM YYYY'}})<br>
+    {{/each}} <br>
+  {{/each}}
 
-   <br>
+  {{#each  mannequin}}
+    <b>Profession :</b> Mannequin <br>
+    {{#if ../defilesM }}<b>Principaux défilés :</b>{{/if }}
+    {{#each  ../defilesM}}
+      {{ this.lieu }} ({{formatDate this.date 'MMMM YYYY'}}) de <a href="/repertoire/vip/{{ this.numCouturier }}">  {{ this.prenomCouturier }} {{ this.nomCouturier }} </a><br>
+    {{/each}} <br>
+  {{/each}}
+
+  {{#each  couturier}}
+    <b>Profession :</b> {{#each ../vip}} {{#ifCond this.sexe "==" 'M'  }} Couturier {{else}} Couturière {{/ifCond}} {{/each }} <br>
+    {{#if ../defilesC }}<b>Principaux défilés :</b>{{/if }}
+    {{#each  ../defilesC}}
+      {{ this.lieu }} ({{formatDate this.date 'MMMM YYYY'}})</a><br>
+    {{/each}} <br>
+  {{/each}}
+
+  {{#each  chanteur}}
+    <b>Profession :</b> {{#each ../vip}} {{#ifCond this.sexe "==" 'M'  }} Chanteur {{else}} Chanteuse {{/ifCond}} {{/each }} ({{ this.spe }}) <br>
+    {{#if ../albums }}<b>Principaux albums :</b>{{/if }}
+    {{#each  ../albums}}
+      {{ this.titre }} ({{formatDate this.date 'DD MMMM YYYY'}}) {{ this.maisonDisque }}<br>
+    {{/each}} <br>
+  {{/each}}
+
 
   {{#if mariage }} <b>Mariage(s) :</b>{{#each mariage }} <a href="/repertoire/vip/{{ this.num }}">{{ this.prenom }} {{ this.nom }} </a> ({{ formatDate this.date 'MMMM YYYY' }}
                                         {{#if this.dateFin }}--> {{ formatDate this.dateFin 'MMMM YYYY' }} {{/if}}
                                         ) <b> Lieu : </b> {{ this.lieu }}
-                                        {{#if this.motif }}  <b> Raison fin mariage :</b> {{ this.motif }} {{/if}} <br><br>{{/each}}
+                                        {{#if this.motif }}  <b> Raison fin mariage :</b> {{ this.motif }} {{/if}} <br>{{/each}}<br>
   {{/if}}
 
   {{#if liaison }} <b>Liaison(s) :</b>{{#each liaison }}   <a href="/repertoire/vip/{{ this.num }}">{{ this.prenom }} {{ this.nom }}</a> (){{formatDate this.date 'MMMM YYYY' }}) {{#if this.motif }} <b> Raison fin liaison :</b> {{ this.motif }} {{/if}} <br><br> {{/each }}
@@ -49,3 +76,8 @@
   {{#each photoSupp}} <img src="/images/vip/{{this.photo}}" style="height : 150px; width: auto;" > {{/each }}
   </div>
 </div>
+
+<script>
+
+
+</script>

@@ -110,7 +110,103 @@ module.exports.acteurByVipNum = function(numero, callback) {
 module.exports.filmByActorNum = function(numero, callback) {
   db.getConnection(function(err, connexion) {
     if (!err) {
-      let sql = "SELECT f.FILM_NUMERO, f.VIP_NUMERO as numReal , FILM_TITRE as nomFilm , FILM_DATEREALISATION as date FROM film f JOIN joue j ON j.FILM_NUMERO=f.FILM_NUMERO WHERE j.VIP_NUMERO="+numero+";";
+      let sql = "SELECT f.FILM_NUMERO, f.VIP_NUMERO as numReal, v.VIP_NOM as nomReal , v.VIP_PRENOM as prenomReal, FILM_TITRE as nomFilm , FILM_DATEREALISATION as date FROM vip v, film f, joue j WHERE j.FILM_NUMERO=f.FILM_NUMERO AND v.VIP_NUMERO=f.VIP_NUMERO AND j.VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.mannequinByVipNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT VIP_NUMERO FROM mannequin where VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.defileByMannequinNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT  d.DEFILE_LIEU as lieu, d.DEFILE_DATE as date, v.VIP_NUMERO as numCouturier, v.VIP_NOM as nomCouturier , v.VIP_PRENOM as prenomCouturier FROM vip v, defile d, defiledans dd WHERE dd.DEFILE_NUMERO=d.DEFILE_NUMERO AND v.VIP_NUMERO=d.VIP_NUMERO AND dd.VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.couturierByVipNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT VIP_NUMERO as num FROM couturier where VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.defileByCouturierNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT  d.DEFILE_LIEU as lieu, d.DEFILE_DATE as date FROM defile d WHERE d.VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.chanteurByVipNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT VIP_NUMERO as num, CHANTEUR_SPECIALITE as spe FROM chanteur where VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.albumByChanteurNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT  a.ALBUM_TITRE as titre, a.ALBUM_DATE as date, m.MAISONDISQUE_NOM as maisonDisque FROM album a, composer c, maisondisque m WHERE a.ALBUM_NUMERO=c.ALBUM_NUMERO AND a.MAISONDISQUE_NUMERO=m.MAISONDISQUE_NUMERO AND c.VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.realByVipNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT VIP_NUMERO as num FROM realisateur where VIP_NUMERO="+numero+";";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.filmByRealNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT  f.FILM_TITRE as titre, f.FILM_DATEREALISATION as date FROM film f WHERE f.VIP_NUMERO="+numero+";";
 
       console.log(sql);
       connexion.query(sql, callback);
