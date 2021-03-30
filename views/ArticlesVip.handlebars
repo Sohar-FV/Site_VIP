@@ -1,0 +1,41 @@
+
+
+<div style="display: flex; flex-direction: row; width: 100%;">
+
+  <div style="display: flex; flex-direction: column; width: 80%;">
+    <fieldset style="width: 90%; margin-left: 10%;">
+    <legend>Article</legend>
+    <h3 style="margin-top: 0px; margin-bottom: 0px;">Choisissez un vip pour voir les articles le concernant</h3>
+    </fieldset>
+
+    <div style=" margin-top: 3%; margin-bottom: 3%;margin-left: 10%; text-align: justify; width: 90%;">
+    {{#each articles}}
+    <fieldset style=" margin-bottom: 3%;">
+    <legend>Article</legend>
+    <div style="margin-bottom: 3%;" >
+      <h2><a style="text-decoration: none; text-decoration: underline; color: black;  margin-left:2%;">{{this.prenom}} {{this.nom}}</a></h2>
+      <p style=" margin-left:2%; margin-right:2%;">{{this.resume}}</p></br>
+
+    <div style=" margin-left:2%; margin-right:2%; margin-bottom:2%; background-color: lightgrey;">
+      [Ajouté le {{formatDate this.date 'DD MMMM YYYY'}}]
+      <a href="/repertoire/vip/{{ this.num }}" style="display:flex; float: right; ">voir sa fiche</a>
+    </div>
+    </div>
+    </fieldset>
+    {{/each}}
+    </div>
+  </div>
+
+
+  <div style="display: flex;flex-direction: column;width:20%; margin-right:0; margin-left: 10%; text-decoration: none; border: 1px solid black; border-radius:15px;">
+    <div style="background-color:black; height: 60px; border-radius:15px 15px 0px 0px;">
+      <img src="\images\vips.png" style="display: flex; width: 50%; height: 40px; margin-left: auto; margin-right: auto;margin-top: 4%; margin-bottom: auto;">
+    </div>
+    {{#each tousLesVip}}
+    <a href="/articles/{{this.numero}}" style="text-decoration: none;text-decoration: underline; color: black;">{{this.prenom}} {{this.nom}}</a></br>
+    {{/each}}
+  </div>
+
+
+
+</div>

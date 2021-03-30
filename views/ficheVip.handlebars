@@ -1,4 +1,7 @@
 
+
+
+
 <div style="border:1px solid black; text-align:left; padding-left: 1%;">
 
   <div style=" text-align:right; margin-right:1%">
@@ -73,11 +76,7 @@
 
   {{#each vip}} <b>Qui-suis-je? :</b> {{ this.texte }} {{/each }} <br><br>
 
-  {{#each photoSupp}} <img src="/images/vip/{{this.photo}}" style="height : 150px; width: auto;" > {{/each }}
+
+  {{#each photoSupp}} <a href ="/images/vip/{{this.photo}}"  rel="lytebox" title="{{this.sujet}} - {{this.comment}}"><img src="/images/vip/{{ this.photo }}" style="height : 150px; width: auto;" ></a> {{/each }}
   </div>
 </div>
-
-<script>
-
-
-</script>

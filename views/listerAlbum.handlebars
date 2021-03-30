@@ -1,1 +1,47 @@
 <h1> Mettre ici l'album photo des stars </h1>
+
+<div id="imageVIP">
+
+
+  {{#each vip}}
+    <p> {{this.nom}} {{this.prenom}}</p>
+    <button type="button" name="button"></button>
+    <img src="" alt="">
+    <button type="button" name="button"></button>
+    <div class="">
+    </div>
+  {{/each}}
+</div>
+
+
+
+
+
+
+
+
+{{setVar "min" "test"}}
+<p> {{test}} </p>
+<div id="choixVIP">
+<div id="choixImages">
+  {{#each photo}}
+
+    {{#ifCond this.numero '>=' 1}}
+      {{#ifCond this.numero '<=' 12}}
+        <a href="/repertoire/vip/{{ this.numero }}"> <img src="/images/vip/{{this.adresse}}"> </a>
+      {{/ifCond}}
+    {{/ifCond}}
+  {{/each}}
+
+  </div>
+  <div id="choixButtons">
+    <div>
+      <button id="debut">Début</button>
+      <button id="precedent">Précédent</button>
+    </div>
+    <div>
+      <button id="suivant">Suivant</button>
+      <button id="fin">Fin</button>
+    </div>
+  </div>
+</div>

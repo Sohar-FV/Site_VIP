@@ -12,6 +12,8 @@ module.exports.test = function(callback) {
   });
 };
 
+//Répertoire -------------------------------------
+
 module.exports.firstLetterVip = function(callback) {
   db.getConnection(function(err, connexion) {
     if (!err) {
@@ -35,6 +37,8 @@ module.exports.vipByLetter = function(letter, callback) {
   });
 };
 
+//Fiches VIP -------------------------------------
+
 module.exports.vipByNum = function(numero, callback) {
   db.getConnection(function(err, connexion) {
     if (!err) {
@@ -50,7 +54,7 @@ module.exports.vipByNum = function(numero, callback) {
 module.exports.photo1ByVipNum = function(numero, callback) {
   db.getConnection(function(err, connexion) {
     if (!err) {
-      let sql = "SELECT p.PHOTO_ADRESSE as photo FROM photo p WHERE p.VIP_NUMERO = "+numero+" group by p.VIP_NUMERO;";
+      let sql = "SELECT p.PHOTO_ADRESSE as photo FROM photo p WHERE p.VIP_NUMERO = "+numero+" AND p.PHOTO_NUMERO = 1;";
 
       console.log(sql);
       connexion.query(sql, callback);
@@ -62,7 +66,7 @@ module.exports.photo1ByVipNum = function(numero, callback) {
 module.exports.photoSuppByVipNum = function(numero, callback) {
   db.getConnection(function(err, connexion) {
     if (!err) {
-      let sql = "SELECT p.PHOTO_ADRESSE as photo FROM photo p WHERE p.VIP_NUMERO = "+numero+" AND p.PHOTO_NUMERO > 1;";
+      let sql = "SELECT p.PHOTO_ADRESSE as photo , p.PHOTO_SUJET as sujet, p.PHOTO_COMMENTAIRE as comment FROM photo p WHERE p.VIP_NUMERO = "+numero+" AND p.PHOTO_NUMERO > 1;";
 
       console.log(sql);
       connexion.query(sql, callback);
@@ -208,6 +212,55 @@ module.exports.filmByRealNum = function(numero, callback) {
     if (!err) {
       let sql = "SELECT  f.FILM_TITRE as titre, f.FILM_DATEREALISATION as date FROM film f WHERE f.VIP_NUMERO="+numero+";";
 
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+//Albums -------------------------------------
+
+module.exports.officialPhotos = function(callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT  p.PHOTO_ADRESSE as adresse, p.VIP_NUMERO as numero FROM photo p WHERE PHOTO_NUMERO = 1;";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+//Articles --------------------------------------
+
+module.exports.tousLesVip = function(callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT v.VIP_NUMERO as numero, v.VIP_NOM as nom, v.VIP_PRENOM as prenom FROM vip v ORDER by nom ASC;";
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.articles = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT v.VIP_NUMERO as num, v.VIP_NOM as nom, v.VIP_PRENOM as prenom, a.ARTICLE_NUMERO as numArt, a.ARTICLE_TITRE as titre, a.ARTICLE_RESUME as resume, a.ARTICLE_NUMEROPAGEDEBUT as pageDebut, a.ARTICLE_DATE_INSERT as date from article a JOIN apoursujet ap ON a.ARTICLE_NUMERO = ap.ARTICLE_NUMERO JOIN vip v ON ap.VIP_NUMERO=v.VIP_NUMERO where v.VIP_NUMERO="+numero+" ORDER BY a.ARTICLE_DATE_INSERT DESC;";
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
+module.exports.detailsArticles = function(numeroArticle, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT a.ARTICLE_NUMERO as numArt, a.ARTICLE_TITRE as titre, a.EXEMPLAIRE_NUMERO as numExempl, a.ARTICLE_RESUME as resume, a.ARTICLE_NUMEROPAGEDEBUT as pageDebut, a.ARTICLE_DATE_INSERT as date, e.EXEMPLAIRE_DATEPUBLICATION as datePub from article a JOIN apoursujet ap ON a.ARTICLE_NUMERO = ap.ARTICLE_NUMERO JOIN exemplaire e ON a.EXEMPLAIRE_NUMERO=e.EXEMPLAIRE_NUMERO where a.ARTICLE_NUMERO="+numeroArticle+";";
       console.log(sql);
       connexion.query(sql, callback);
       connexion.release();

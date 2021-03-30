@@ -91,7 +91,12 @@ function hbsHelpers(handlebars) {
                     default:
                         return options.inverse(this);
                 }
-            }
+            },
+            setVar : function(name, value) {
+                        data[name] = value;
+                        console.log(data);
+                        return '';
+                     }
         }
     });
 }

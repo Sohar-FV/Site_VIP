@@ -81,3 +81,32 @@ a  {
 .traitVertical {
   border-left: 1px white solid;
 }
+
+#choixVIP {
+  width:300px;
+  border: 1px solid black;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#choixImages {
+  width:240px;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#choixImages>a>img {
+  background-size: cover;
+  margin:5px;
+  width: 50px;
+  height: 70px;
+}
+
+#choixButtons{
+  width:290px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -35,8 +35,8 @@ module.exports.Repertoire = 	function(request, response){
 
 
 module.exports.ficheVip = 	function(request, response){
- response.title = 'Test à supprimer';
 
+response.title = 'Répertoire des stars';
  async.parallel ([
 
    function (callback){
@@ -111,7 +111,9 @@ module.exports.ficheVip = 	function(request, response){
    response.defilesC = result[13];
    response.chanteur = result[14];
    response.albums = result[15];
-   console.log(response.albums);
+
+
+   console.log(response.vip);
    response.render('ficheVip', response);
  }
 ); // appel la vue Handlebars qui va afficher le résultat
