@@ -267,3 +267,16 @@ module.exports.detailsArticles = function(numeroArticle, callback) {
     }
   });
 };
+
+
+//Administration --------------------------------------
+
+module.exports.connexion = function(login, pwd, callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "SELECT LOGIN, PASSWD FROM parametres WHERE LOGIN = \"" + login + "\"";
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};

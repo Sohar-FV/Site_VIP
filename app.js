@@ -45,3 +45,40 @@ require('./router/router')(app);
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Serveur Node.js en attente sur le port ' + app.get('port'));
 });
+
+let appAdmin = express();
+
+appAdmin.use(bodyParser.urlencoded({extended: true}));
+appAdmin.set('port', 6900);
+appAdmin.set('views', path.join(__dirname, 'viewsAdmin'));
+
+// routes static, le routeur n'y aura pas accès
+appAdmin.use(express.static(path.join(__dirname, '/public')));
+
+appAdmin.use(cookieParser());
+
+appAdmin.use(session({
+    secret: 'nC0@#1pM/-0qA1+é',
+    name: 'VipNode',
+    resave: true,
+    saveUninitialized: true
+}));
+
+/* ces lignes permettent d'utiliser directement les variables de session dans handlebars
+ UTILISATION : {{session.MaVariable}}  */
+ appAdmin.use(function(request, response, next){
+    response.locals.session = request.session;
+    next();
+});
+
+appAdmin.set('view engine', 'handlebars'); //nom de l'extension des fichiers
+// helpers : extensions d'handlebars
+
+appAdmin.engine('handlebars', handlebars.engine);
+
+// chargement du routeur
+require('./router/router')(appAdmin);
+
+http.createServer(appAdmin).listen(appAdmin.get('port'), function(){
+    console.log('Serveur Node.js en attente sur le port ' + appAdmin.get('port'));
+});

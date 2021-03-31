@@ -96,7 +96,7 @@ function hbsHelpers(handlebars) {
                         data[name] = value;
                         console.log(data);
                         return '';
-                     }
+                     },
         }
     });
 }
