@@ -280,3 +280,112 @@ module.exports.connexion = function(login, pwd, callback) {
         }
     });
 };
+
+module.exports.nationnalite = function(callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "SELECT  NATIONALITE_NOM, NATIONALITE_NUMERO  FROM nationalite";
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.vips = function(callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "SELECT VIP_NOM, VIP_NUMERO, VIP_PRENOM FROM vip ORDER BY VIP_NOM ASC ;";
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.vip = function(vip, callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "SELECT v.VIP_NOM, v.VIP_NUMERO, VIP_PRENOM, VIP_SEXE, VIP_NAISSANCE, VIP_TEXTE, PHOTO_SUJET, PHOTO_ADRESSE FROM vip v JOIN photo p ON v.VIP_NUMERO=p.VIP_NUMERO WHERE PHOTO_NUMERO = 1 AND v.VIP_NUMERO = " +  vip + " ORDER BY VIP_NOM ASC ;";
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.ajouterVip = function(nationalite, nom, prenom, sexe, naissance, texte, photo, sujet, callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "INSERT INTO vip (NATIONALITE_NUMERO, VIP_NOM, VIP_PRENOM, VIP_SEXE, VIP_NAISSANCE, VIP_TEXTE, VIP_DATE_INSERTION)VALUES ( \"" + nationalite + "\", \"" + nom + "\", \"" + prenom + "\", \"" + sexe + "\", " + naissance + ", \"" + texte + "\", NOW());";
+            console.log(sql);
+            connexion.query(sql, callback);
+            connexion.release();
+            db.getConnection(function(err, connexion) {
+                if (!err) {
+                    sql = "INSERT INTO photo (PHOTO_NUMERO, VIP_NUMERO, PHOTO_SUJET, PHOTO_COMMENTAIRE, PHOTO_ADRESSE) VALUES (1,(SELECT VIP_NUMERO FROM vip ORDER BY VIP_NUMERO DESC LIMIT 1), \""+ sujet + "\",\"\", \"" + photo + "\")";
+                    console.log(sql);
+                    connexion.query(sql, callback);
+                    connexion.release();
+                }
+            });
+        };
+    });
+}
+
+module.exports.modifVip = function(vipId, nationalite, nom, prenom, sexe, naissance, texte, photo, sujet, callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "UPDATE vip SET NATIONALITE_NUMERO = \"" + nationalite + "\", VIP_NOM = \"" + nom + "\", VIP_PRENOM = \"" + prenom + "\", VIP_SEXE = \"" + sexe + "\", VIP_NAISSANCE = " + naissance + ", VIP_TEXTE = \"" + texte + "\" WHERE VIP_NUMERO = " + vipId + ";";
+            console.log(sql);
+            connexion.query(sql, callback);
+            connexion.release();
+            db.getConnection(function(err, connexion) {
+                if (!err) {
+                    if (photo) {
+                        sql = "UPDATE photo SET PHOTO_SUJET = \"" + sujet +"\", PHOTO_ADRESSE = \"" + photo + "\" WHERE VIP_NUMERO = " + vipId;
+                    }
+                    else
+                    {
+                        sql = "UPDATE photo SET PHOTO_SUJET = \"" + sujet +"\" WHERE VIP_NUMERO = " + vipId;
+                    }
+                    console.log(sql);
+                    connexion.query(sql, callback);
+                    connexion.release();
+                }
+            });
+        };
+    });
+}
+
+module.exports.photos = function(idVip, callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "SELECT VIP_NUMERO, PHOTO_NUMERO, PHOTO_SUJET FROM photo WHERE VIP_NUMERO = " + idVip + " AND PHOTO_NUMERO <> 1";
+            console.log(sql);
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+}
+
+module.exports.ajoutPhoto = function(idVip, sujet, commenaire, photo, callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "INSERT INTO photo (PHOTO_NUMERO, VIP_NUMERO, PHOTO_SUJET, PHOTO_COMMENTAIRE, PHOTO_ADRESSE)VALUES ((SELECT PHOTO_NUMERO + 1 FROM (SELECT * FROM photo) t1 WHERE VIP_NUMERO = "+ idVip + " ORDER BY PHOTO_NUMERO DESC LIMIT 1)," + idVip + ", \""+ sujet + "\",\""+ commenaire +"\", \"" + photo + "\")";
+            console.log(sql);
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+}
+
+
+
+module.exports.deletePhoto = function(idVip, idPhoto, callback) {
+    db.getConnection(function(err, connexion) {
+        if (!err) {
+            let sql = "DELETE FROM photo WHERE VIP_NUMERO = " + idVip + " AND PHOTO_NUMERO = " + idPhoto;
+            console.log(sql);
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+}
