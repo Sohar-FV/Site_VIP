@@ -7,13 +7,25 @@ var async = require('async');
 module.exports.ListerAlbum = 	function(request, response){
    response.title = 'Album des stars';
 
-   model.officialPhotos(function(err, result){  // appel le module test qui exécute la requete SQL
-       if (err) {
-           console.log(err);
-           return;
-       }
-     response.photo = result
-     console.log(response.photo);
+  async.parallel ([
+
+    function (callback){
+      model.officialPhotos(function(err, result)  {callback(null,result) } )
+    },
+    function (callback){
+      model.vip_photoByVipNum(request.params.numero, (function(err, result)  {callback(null,result) } ));
+    },
+  ],
+  function (err, result){
+   	if (err) {
+      console.log(err);
+      return;
+    }
+    response.numero = request.params.numero;
+    response.photoAllVip = result[0];
+    response.vip = result[1];
+    console.log(response.photoAllVip);
+    console.log(response.vip);
 
    response.render('listerAlbum', response);
  }) ;

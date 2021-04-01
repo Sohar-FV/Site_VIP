@@ -24,6 +24,7 @@ if(app.get('port')==6800){
 
   // albums
   app.get('/album', AlbumController.ListerAlbum);
+  app.get('/album/:numero', AlbumController.ListerAlbum);
 
   // articles
   app.get('/articles', ArticleController.ArticlesVip);
@@ -51,16 +52,4 @@ if(app.get('port')==6800){
         //supprimer un vip
         app.get('/supprimerVip', AdministrationController.SupprimerVip);
         app.post('/supprimerVip', AdministrationController.SupprimerVip);
-
-        //redirection photo
-        app.get('/photo', AdministrationController.Photo);
-        app.post('/photo', AdministrationController.Photo);
-
-        //ajout d'une photo
-        app.get('/ajouterPhoto', AdministrationController.AjouterPhoto);
-        app.post('/ajouterPhoto', AdministrationController.AjouterPhoto);
-
-        //suppression d'une photo
-        app.get('/supprimerPhoto', AdministrationController.SupprimerPhoto);
-        app.post('/supprimerPhoto', AdministrationController.SupprimerPhoto);
 }}};

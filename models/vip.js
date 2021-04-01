@@ -233,6 +233,18 @@ module.exports.officialPhotos = function(callback) {
   });
 };
 
+module.exports.vip_photoByVipNum = function(numero, callback) {
+  db.getConnection(function(err, connexion) {
+    if (!err) {
+      let sql = "SELECT v.VIP_NOM as nom, v.VIP_PRENOM as prenom, p.PHOTO_ADRESSE as adresse, p.PHOTO_COMMENTAIRE as commentaire, p.PHOTO_NUMERO as numero FROM vip v, photo p WHERE v.VIP_NUMERO = "+numero+" AND p.VIP_NUMERO = "+numero+" group by numero;";
+
+      console.log(sql);
+      connexion.query(sql, callback);
+      connexion.release();
+    }
+  });
+};
+
 //Articles --------------------------------------
 
 module.exports.tousLesVip = function(callback) {
@@ -352,40 +364,5 @@ module.exports.modifVip = function(vipId, nationalite, nom, prenom, sexe, naissa
                 }
             });
         };
-    });
-}
-
-module.exports.photos = function(idVip, callback) {
-    db.getConnection(function(err, connexion) {
-        if (!err) {
-            let sql = "SELECT VIP_NUMERO, PHOTO_NUMERO, PHOTO_SUJET FROM photo WHERE VIP_NUMERO = " + idVip + " AND PHOTO_NUMERO <> 1";
-            console.log(sql);
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    });
-}
-
-module.exports.ajoutPhoto = function(idVip, sujet, commenaire, photo, callback) {
-    db.getConnection(function(err, connexion) {
-        if (!err) {
-            let sql = "INSERT INTO photo (PHOTO_NUMERO, VIP_NUMERO, PHOTO_SUJET, PHOTO_COMMENTAIRE, PHOTO_ADRESSE)VALUES ((SELECT PHOTO_NUMERO + 1 FROM (SELECT * FROM photo) t1 WHERE VIP_NUMERO = "+ idVip + " ORDER BY PHOTO_NUMERO DESC LIMIT 1)," + idVip + ", \""+ sujet + "\",\""+ commenaire +"\", \"" + photo + "\")";
-            console.log(sql);
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    });
-}
-
-
-
-module.exports.deletePhoto = function(idVip, idPhoto, callback) {
-    db.getConnection(function(err, connexion) {
-        if (!err) {
-            let sql = "DELETE FROM photo WHERE VIP_NUMERO = " + idVip + " AND PHOTO_NUMERO = " + idPhoto;
-            console.log(sql);
-            connexion.query(sql, callback);
-            connexion.release();
-        }
     });
 }

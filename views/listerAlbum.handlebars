@@ -1,42 +1,55 @@
-<h1> Mettre ici l'album photo des stars </h1>
+<h1> Album photo des stars </h1>
+<p> Cliquez sur une photo </p>
 
 
+<div id="album">
 
-<div id="imageVIP">
-
-  {{#each vip}}
-    <p> {{this.nom}} {{this.prenom}}</p>
-    <button type="button" name="button"></button>
-    <img src="" alt="">
-    <button type="button" name="button"></button>
-    <div class="">
-    </div>
-  {{/each}}
-</div>
-
-
-{{setVar "min" 1}}
-{{setVar "max" 12}}
-<div id="choixVIP">
-<div id="choixImages">
-  {{#each photo}}
-<!-- min et max ont une valeur mais on ne peut pas s'en servir pour comme conditions d'un ifCond -->
-    {{#ifCond this.numero '>=' ../min}}
-      {{#ifCond this.numero '<=' ../max}}
-        <a href="/repertoire/vip/{{ this.numero }}"> <img src="/images/vip/{{this.adresse}}"> </a>
+  <div id="albumVIP">
+    {{setVar "minVip" 1}}
+    {{#each vip}}
+      {{#ifCond this.numero '==' ../minVip}}
+      <div>
+        <p> {{this.prenom}} {{this.nom}} </p>
+      </div>
+      <div id="imageVIP">
+        <button type="button" name="button">Précédent</button>
+        <img src="/images/vip/{{this.adresse}}">
+        <button type="button" name="button">Suivant</button>
+      </div> 
+      <fieldset>
+        <legend>Commentaires</legend>
+        <p> {{ this.commentaire }} </p>
+      </fieldset>
+        
       {{/ifCond}}
-    {{/ifCond}}
-  {{/each}}
-
+    {{/each}}
   </div>
-  <div id="choixButtons">
-    <div>
-      <button id="debut">Début</button>
-      {{#ifCond 1 '!=' ../min}} <button id="precedent">Précédent</button> {{/ifCond}}
+
+
+  {{setVar "minAll" 1}}
+  {{setVar "maxAll" 12}}
+  <div id="choixVIP">
+    <div id="choixImages">
+    {{#each photoAllVip}}
+  <!-- min et max ont une valeur mais on ne peut pas s'en servir pour comme conditions d'un ifCond -->
+      {{#ifCond this.numero '>=' ../minAll}}
+        {{#ifCond this.numero '<=' ../maxAll}}
+          <a href="/album/{{ this.numero }}"> <img src="/images/vip/{{this.adresse}}"> </a>
+        {{/ifCond}}
+      {{/ifCond}}
+    {{/each}}
+
     </div>
-    <div>
-      <button id="suivant">Suivant</button>
-      <button id="fin">Fin</button>
+    <div id="choixButtons">
+      <div>
+        {{#ifCond 1 '!=' ../minAll}}<button id="debut">Début</button> {{/ifCond}}
+        {{#ifCond 1 '!=' ../minAll}} <button id="precedent">Précédent</button> {{/ifCond}}
+      </div>
+      <div>
+        <button id="suivant">Suivant</button>
+        <button id="fin">Fin</button>
+      </div>
     </div>
   </div>
 </div>
+

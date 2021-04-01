@@ -52,19 +52,19 @@
 
       function precedent(){
 
-          {{editVar "min" '-' 12}}
-          {{editVar "max" '-' 12}}
+          {{editVar "minAll" '-' 12}}
+          {{editVar "maxAll" '-' 12}}
         }
       $("#precedent").on("click", precedent);
 
       function suivant(){
-          {{editVar "min" '+' 12}}
-          {{editVar "max" '+' 12}}
+          {{editVar "minAll" '+' 12}}
+          {{editVar "maxAll" '+' 12}}
         }
       $("#suivant").on("click", suivant);
 
       function fin(){
-          alert("ok");
+        
         }
       $("#fin").on("click", fin);
 
