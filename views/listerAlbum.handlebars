@@ -1,7 +1,8 @@
 <h1> Mettre ici l'album photo des stars </h1>
 
-<div id="imageVIP">
 
+
+<div id="imageVIP">
 
   {{#each vip}}
     <p> {{this.nom}} {{this.prenom}}</p>
@@ -14,20 +15,14 @@
 </div>
 
 
-
-
-
-
-
-
-{{setVar "min" "test"}}
-<p> {{test}} </p>
+{{setVar "min" 1}}
+{{setVar "max" 12}}
 <div id="choixVIP">
 <div id="choixImages">
   {{#each photo}}
-
-    {{#ifCond this.numero '>=' 1}}
-      {{#ifCond this.numero '<=' 12}}
+<!-- min et max ont une valeur mais on ne peut pas s'en servir pour comme conditions d'un ifCond -->
+    {{#ifCond this.numero '>=' ../min}}
+      {{#ifCond this.numero '<=' ../max}}
         <a href="/repertoire/vip/{{ this.numero }}"> <img src="/images/vip/{{this.adresse}}"> </a>
       {{/ifCond}}
     {{/ifCond}}
@@ -37,7 +32,7 @@
   <div id="choixButtons">
     <div>
       <button id="debut">Début</button>
-      <button id="precedent">Précédent</button>
+      {{#ifCond 1 '!=' ../min}} <button id="precedent">Précédent</button> {{/ifCond}}
     </div>
     <div>
       <button id="suivant">Suivant</button>

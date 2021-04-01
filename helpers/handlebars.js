@@ -93,10 +93,26 @@ function hbsHelpers(handlebars) {
                 }
             },
             setVar : function(name, value) {
-                        data[name] = value;
-                        console.log(data);
+                        this[name] = value;
+                        console.log(this);
                         return '';
-                     }
+            },
+            editVar : function(name, operator, value) {
+              switch (operator) {
+                  case '+' :
+                        this[name] += value;
+                        break;
+                  case '-' :
+                       this[name] += value;
+                       break;
+                  default:
+                       this[name] = value;
+                       break;
+              }
+              console.log(this);
+              return '';
+            }
+
         }
     });
 }

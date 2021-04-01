@@ -38,6 +38,38 @@
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="/js/lytebox.js"></script>
-  <script src="/js/album.js"></script
+  <!--<script src="/js/album.js"></script>-->
+  <script type="text/javascript">
+  //Boutons de navigation de l'album photo
+  $(function(){
+    $(document).ready(function() {
+
+
+      function debut(){
+
+        }
+      $("#debut").on("click", debut);
+
+      function precedent(){
+
+          {{editVar "min" '-' 12}}
+          {{editVar "max" '-' 12}}
+        }
+      $("#precedent").on("click", precedent);
+
+      function suivant(){
+          {{editVar "min" '+' 12}}
+          {{editVar "max" '+' 12}}
+        }
+      $("#suivant").on("click", suivant);
+
+      function fin(){
+          alert("ok");
+        }
+      $("#fin").on("click", fin);
+
+      });
+  });
+  </script>
 </body>
 </html>
