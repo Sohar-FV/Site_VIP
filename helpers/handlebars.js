@@ -96,6 +96,7 @@ function hbsHelpers(handlebars) {
                         this[name] = value;
                         console.log(this);
                         return '';
+<<<<<<< HEAD
             },
             editVar : function(name, operator, value) {
               switch (operator) {
@@ -113,6 +114,9 @@ function hbsHelpers(handlebars) {
               return '';
             }
 
+=======
+                     },
+>>>>>>> 3e05658efd821cb13789b3bb20f4074ad9ab9705
         }
     });
 }

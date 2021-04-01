@@ -1,0 +1,83 @@
+<div style="width: 100%; display:flex; flex-direction: row;">
+  <div style="width: 12%;">
+    <div style='width:100%;border-radius:15px 15px 0px 0px; background-color:black'>
+      <img src="/images/vips.png" alt="VIPs" />
+    </div>
+    <div style="width:100%;border:1px solid white;background-color:black;display:flex;height:3.5em;">
+      <a href='/ajouterVip' style='color:white; text-decoration:underline;margin-left: auto; margin-right: auto; margin-top: 4%'>Ajouter</a>
+    </div>
+    <div style="width:100%; height:3.5em;border:1px solid white;background-color:black;display:flex;">
+      <a href='/modifierVip' style='color:white; text-decoration:underline; margin-left: auto; margin-right: auto; margin-top: 4%'>Modifier</a>
+    </div>
+    <div style="width:100%;border:1px solid white;background-color:black;height:3.5em;display:flex;">
+      <a href='/supprimerVip' style='color:white; text-decoration:underline; margin-left: auto; margin-right: auto; margin-top: 4%'>Supprimer</a>
+    </div>
+  </div>
+
+  <div style='width:70%; margin-left: 5%;'>
+    {{#if msg}}
+    <p>{{this.msg}}</p>
+    <form action='/ajouterVip' class='form' method='POST' >
+      <input type='submit' name='input_ajout_vip' value='Continuer'>
+    </form>
+    {{else}}
+    <fieldset style='width:100%'>
+      <legend style="text-align: left;">Ajout VIPs</legend>
+      <form action='/ajouterVip' class='form' method='POST' style="display: flex; flex-direction: column" >
+        <div style="display: flex;float: left;margin-bottom:2%; ">
+          <label for='nom_vip'>Nom* :</label>
+          <input type='text' name='nom_vip' style="margin-left: 15%;" required>
+        </div>
+
+        <div style="display: flex;float: left; margin-bottom:2%; ">
+          <label for='prenom_vip'>Prénom* :</label>
+          <input type='text' name='prenom_vip'style="margin-left: 13%;" required>
+
+        </div>
+
+        <div style="display: flex;float: left;margin-bottom:2%; ">
+          <label for='sexe'>Sexe :</label>
+
+          <select name="sexe" style="margin-left: 15.5%;" required>
+            <option value="M">Masculin</option>
+            <option value="F">Féminin</option>
+          </select>
+        </div>
+
+
+        <div style="display: flex;float: left;margin-bottom:2%;">
+          <label for='date_naiss_vip'>Date de naissance :</label>
+          <input type='date' name='date_naiss_vip'style="margin-left: 7%;" required>
+
+        </div>
+
+        <div style="display: flex;float: left;margin-bottom:2%;">
+          <label for='nation_vip'>Nationalité :</label>
+
+          <select name="nation_vip" style="margin-left: 11.5%;" required>
+            {{#each nationalites}}
+            <option value="{{this.NATIONALITE_NUMERO}}">{{this.NATIONALITE_NOM}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div style="display: flex;float: left;margin-bottom:2%;">
+          <label for='com_vip'>Commentaire :</label>
+          <input type='text' name='com_vip'style="margin-left: 10%; width: 65%; height:100px;" required>
+
+        </div>
+        <div style="display: flex;float: left;margin-bottom:2%;">
+          <label for='image_vip'>Sélectionner l'image :</label>
+          <input type='file' name='image_vip' accept="image/png, image/jpeg" style="margin-left: 5.5%;" required>
+        </div>
+        <div style="display: flex;float: left;margin-bottom:2%;">
+          <label for='sujet_vip'>Sujet :</label>
+          <input type='text' name='sujet_vip' style="margin-left: 15%;" required>
+        </div>
+
+        <input type='submit' name='input_ajout_vip' value='Ajouter le vip' style=" margin-left: 40%; margin-right: 40%;">
+      </form>
+    </fieldset>
+    {{/if}}
+  </div>
+</div>

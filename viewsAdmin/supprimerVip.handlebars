@@ -1,0 +1,31 @@
+<div style="width: 100%; display:flex;">
+  <div style="width: 12%;">
+    <div style='width:100%;border-radius:15px 15px 0px 0px; background-color:black'>
+      <img src="/images/vips.png" alt="VIPs" />
+    </div>
+    <div style="width:100%;border:1px solid white;background-color:black;display:flex;height:3.5em;">
+      <a href='/ajouterVip' style='color:white; text-decoration:underline;margin-left: auto; margin-right: auto; margin-top: 4%'>Ajouter</a>
+    </div>
+    <div style="width:100%; height:3.5em;border:1px solid white;background-color:black;display:flex;">
+      <a href='/modifierVip' style='color:white; text-decoration:underline; margin-left: auto; margin-right: auto; margin-top: 4%'>Modifier</a>
+    </div>
+    <div style="width:100%;border:1px solid white;background-color:black;height:3.5em;display:flex;">
+      <a href='/supprimerVip' style='color:white; text-decoration:underline; margin-left: auto; margin-right: auto; margin-top: 4%'>Supprimer</a>
+    </div>
+  </div>
+
+    {{#if vips}}
+        <fieldset style='width:80%'>
+            <legend >Supprimer VIPs</legend>
+                    <form action="/supprimerVip" method="POST">
+                        <label for='vip_choix'>Choisissez le vip à supprimer : </label>
+                            <select name="vip_choix">
+                                {{#each vips}}
+                                    <option value="{{this.VIP_NUMERO}}">{{this.VIP_NOM}} {{this.VIP_PRENOM}}</option>
+                                {{/each}}
+                            </select>
+                        <input type="submit" value='Supprimer'>
+                    </form>
+        </fieldset>
+    {{/if}}
+</div>
