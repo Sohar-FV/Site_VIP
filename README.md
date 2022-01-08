@@ -10,5 +10,5 @@ Struture de base fournie par le professeur encadrant : https://gitlab.com/MiCha/
 ## Auteurs
 
 * **Loann Bourdier** _alias_ [@Loannb8733](https://github.com/Loannb8733)
-* **Léo THINNES** _alias_ [@LeoThinnes(https://github.com/LeoThinnes)
+* **Léo THINNES** _alias_ [@LeoThinnes](https://github.com/LeoThinnes)
 * **Florian VIVET** _alias_ [@Sohar-FV](https://github.com/Sohar-FV)
